@@ -75,13 +75,19 @@ struct ContentView: View {
         }
         .padding()
         .onChange(of: selectedWaveform) {
-            // Update synthesizer waveform when changed
+            audioEngine.setWaveform(selectedWaveform)
         }
         .onChange(of: filterCutoff) {
-            // Update filter cutoff when changed
+            audioEngine.setFilterCutoff(Float(filterCutoff))
         }
         .onChange(of: amplitude) {
-            // Update amplitude when changed
+            audioEngine.setAmplitude(Float(amplitude))
+        }
+        .onAppear {
+            // Set initial values
+            audioEngine.setWaveform(selectedWaveform)
+            audioEngine.setFilterCutoff(Float(filterCutoff))
+            audioEngine.setAmplitude(Float(amplitude))
         }
     }
 }

@@ -46,4 +46,16 @@ class AudioEngine: ObservableObject {
         synthesizer?.stop()
         isPlaying = false
     }
+    
+    func setWaveform(_ waveform: WaveformType) {
+        synthesizer?.setWaveform(waveform)
+    }
+    
+    func setFilterCutoff(_ cutoff: Float) {
+        synthesizer?.setFilterCutoff(cutoff)
+    }
+    
+    func setAmplitude(_ amplitude: Float) {
+        synthesizer?.setAmplitude(amplitude)
+    }
 }
