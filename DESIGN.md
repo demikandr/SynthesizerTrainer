@@ -50,6 +50,53 @@
 - `AppState`: Global app state and user progress
 - `AudioSettings`: Audio configuration and parameters
 
+## Class Dependencies
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        UI Layer                             │
+├─────────────────────────────────────────────────────────────┤
+│  ContentView                                                │
+│       │                                                     │
+│       ├─── SynthControlView ──┐                            │
+│       ├─── WaveformView       │                            │
+│       └─── SoundLibraryView   │                            │
+│                               │                            │
+└───────────────────────────────┼────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────┐
+│                      Data Layer                             │
+├─────────────────────────────────────────────────────────────┤
+│  AppState ◄─────────────────── AudioSettings               │
+│     │                              │                       │
+│     └─── SoundLibrary               │                       │
+│              │                      │                       │
+│              └─── TargetSound       │                       │
+│                                     │                       │
+└─────────────────────────────────────┼───────────────────────┘
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                     Audio Layer                             │
+├─────────────────────────────────────────────────────────────┤
+│  AudioEngine                                                │
+│       │                                                     │
+│       ├─── Synthesizer                                     │
+│       ├─── SoundMatcher                                    │
+│       └─── TargetSound (playback)                         │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+Key Relationships:
+• ContentView owns and orchestrates all UI components
+• AppState serves as central state manager for the entire app
+• AudioEngine manages all audio operations and synthesis
+• SoundMatcher compares audio from Synthesizer with TargetSound
+• UI controls flow through AppState to AudioEngine parameters
+• Real-time audio data flows from AudioEngine to WaveformView
+```
+
 ## Feature Implementation List
 
 ### Foundation
