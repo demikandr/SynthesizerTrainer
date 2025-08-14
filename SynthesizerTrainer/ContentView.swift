@@ -2,6 +2,9 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var audioEngine = AudioEngine()
+    @StateObject private var soundLibrary = SoundLibrary()
+    @StateObject private var targetSoundPlayer = TargetSoundPlayer()
+    
     @State private var selectedWaveform: WaveformType = .sine
     @State private var filterCutoff: Double = 1000.0
     @State private var amplitude: Double = 0.3
@@ -20,10 +23,61 @@ struct ContentView: View {
                     .foregroundColor(.secondary)
             }
             
+            // Target Sound Section
+            if let targetSound = soundLibrary.currentTargetSound {
+                VStack(spacing: 15) {
+                    Text("Target Sound")
+                        .font(.headline)
+                    
+                    VStack {
+                        Text(targetSound.name)
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text(targetSound.description)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    // Target sound control buttons
+                    HStack(spacing: 20) {
+                        Button("◀") {
+                            _ = soundLibrary.getPreviousTargetSound()
+                        }
+                        .disabled(soundLibrary.targetSounds.first?.id == targetSound.id)
+                        
+                        Button(action: {
+                            if targetSoundPlayer.isPlaying {
+                                targetSoundPlayer.stopTargetSound()
+                            } else {
+                                targetSoundPlayer.playTargetSound(targetSound)
+                            }
+                        }) {
+                            Image(systemName: targetSoundPlayer.isPlaying ? "stop.fill" : "play.fill")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .frame(width: 60, height: 60)
+                                .background(targetSoundPlayer.isPlaying ? Color.red : Color.blue)
+                                .clipShape(Circle())
+                        }
+                        
+                        Button("▶") {
+                            _ = soundLibrary.getNextTargetSound()
+                        }
+                        .disabled(soundLibrary.targetSounds.last?.id == targetSound.id)
+                    }
+                }
+                .padding()
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(10)
+            }
+            
             Spacer()
             
             // Synthesizer Controls
             VStack(spacing: 25) {
+                Text("Your Synthesizer")
+                    .font(.headline)
+                
                 // Play/Stop Button
                 Button(action: {
                     if audioEngine.isPlaying {
