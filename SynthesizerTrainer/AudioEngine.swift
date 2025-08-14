@@ -58,4 +58,12 @@ class AudioEngine: ObservableObject {
     func setAmplitude(_ amplitude: Float) {
         synthesizer?.setAmplitude(amplitude)
     }
+    
+    func setAttackTime(_ time: Float) {
+        synthesizer?.setAttackTime(time)
+    }
+    
+    func setReleaseTime(_ time: Float) {
+        synthesizer?.setReleaseTime(time)
+    }
 }

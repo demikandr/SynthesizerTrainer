@@ -17,6 +17,13 @@ class Synthesizer: NSObject {
     private var filterState: Float = 0.0
     private var filterCoeff: Float = 0.1
     
+    // Simple envelope (attack/release only)
+    private var attackTime: Float = 0.1 // seconds
+    private var releaseTime: Float = 0.3 // seconds
+    private var envelopeValue: Float = 0.0
+    private var envelopeTarget: Float = 0.0
+    private var envelopeRate: Float = 0.0
+    
     private var isGenerating = false
     private var audioSourceNode: AVAudioSourceNode!
     
@@ -50,11 +57,12 @@ class Synthesizer: NSObject {
         for frame in 0..<Int(frameCount) {
             let rawSample = generateSample()
             let filteredSample = applyLowPassFilter(rawSample)
+            let envelopedSample = applyEnvelope(filteredSample)
             
             // Write same sample to all channels (mono to stereo)
             for buffer in ablPointer {
                 let bufferPointer = buffer.mData?.assumingMemoryBound(to: Float.self)
-                bufferPointer?[frame] = filteredSample
+                bufferPointer?[frame] = envelopedSample
             }
             
             // Increment phase once per frame, not per channel
@@ -104,12 +112,16 @@ class Synthesizer: NSObject {
         isGenerating = true
         // Reset filter state when starting
         filterState = 0.0
+        // Trigger envelope attack
+        envelopeTarget = 1.0
+        envelopeRate = (envelopeTarget - envelopeValue) / (attackTime * sampleRate)
     }
     
     func stop() {
-        isGenerating = false
-        // Reset filter state when stopping
-        filterState = 0.0
+        // Trigger envelope release
+        envelopeTarget = 0.0
+        envelopeRate = (envelopeTarget - envelopeValue) / (releaseTime * sampleRate)
+        // Note: Don't set isGenerating = false immediately, let envelope finish
     }
     
     func setFrequency(_ freq: Float) {
@@ -144,5 +156,34 @@ class Synthesizer: NSObject {
     private func applyLowPassFilter(_ input: Float) -> Float {
         filterState += filterCoeff * (input - filterState)
         return filterState
+    }
+    
+    private func applyEnvelope(_ input: Float) -> Float {
+        // Update envelope value
+        if abs(envelopeValue - envelopeTarget) > 0.001 {
+            envelopeValue += envelopeRate
+            
+            // Clamp to target if we've overshot
+            if (envelopeRate > 0 && envelopeValue >= envelopeTarget) ||
+               (envelopeRate < 0 && envelopeValue <= envelopeTarget) {
+                envelopeValue = envelopeTarget
+                
+                // If we've reached 0 during release, stop generating
+                if envelopeTarget == 0.0 && envelopeValue == 0.0 {
+                    isGenerating = false
+                    filterState = 0.0 // Reset filter when fully stopped
+                }
+            }
+        }
+        
+        return input * envelopeValue
+    }
+    
+    func setAttackTime(_ time: Float) {
+        attackTime = max(0.001, time) // Minimum 1ms
+    }
+    
+    func setReleaseTime(_ time: Float) {
+        releaseTime = max(0.001, time) // Minimum 1ms
     }
 }

@@ -50,6 +50,33 @@
 - `AppState`: Global app state and user progress
 - `AudioSettings`: Audio configuration and parameters
 
+## Development Methodology
+
+### Implementation Process
+Each feature must follow this strict development cycle:
+
+1. **Plan**: Update todo list and mark task as in_progress
+2. **Code**: Implement the feature following existing patterns
+3. **Build**: Compile the project using xcodebuild to catch compilation errors
+4. **Test**: Install and run the app in iOS Simulator
+5. **Verify**: Take screenshot and verify UI/functionality works as expected
+6. **Document**: Update design document to mark feature as completed
+7. **Commit**: Create meaningful git commit with detailed description
+8. **Push**: Push changes to GitHub repository
+
+### Quality Gates
+- **Never commit broken code**: Every commit must compile successfully
+- **Test before commit**: Every feature must be tested in simulator before committing
+- **Screenshot evidence**: Visual verification that features work as expected
+- **Incremental progress**: One feature per commit to maintain clean history
+
+### Testing Requirements
+- Build project with xcodebuild for each change
+- Install updated app to iOS Simulator
+- Launch app and verify new functionality
+- Take screenshot showing working feature
+- Test user interactions (button presses, slider movements, etc.)
+
 ## Class Dependencies
 
 ```
@@ -105,7 +132,7 @@ Key Relationships:
 3. ✅ Create single oscillator audio generation
 4. ✅ Add waveform selection (4 wave types)
 5. ✅ Implement low-pass filter processing
-6. Add simple envelope (attack/release)
+6. ✅ Add simple envelope (attack/release)
 7. ✅ Create real-time parameter control system
 8. ✅ Fix audio synthesis quality and artifacts
 
