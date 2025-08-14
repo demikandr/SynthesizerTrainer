@@ -11,6 +11,11 @@ class Synthesizer: NSObject {
     private var waveformType: WaveformType = .sine
     private var phase: Float = 0.0
     private var sampleRate: Float = 44100.0
+    private var filterCutoff: Float = 1000.0
+    
+    // Simple low-pass filter state
+    private var filterState: Float = 0.0
+    private var filterCoeff: Float = 0.1
     
     private var isGenerating = false
     private var audioSourceNode: AVAudioSourceNode!
@@ -19,6 +24,7 @@ class Synthesizer: NSObject {
         super.init()
         
         self.sampleRate = Float(AVAudioSession.sharedInstance().sampleRate)
+        updateFilterCoefficients()
         
         audioSourceNode = AVAudioSourceNode { [weak self] _, _, frameCount, audioBufferList in
             guard let self = self, self.isGenerating else {
@@ -44,8 +50,9 @@ class Synthesizer: NSObject {
             let bufferPointer = buffer.mData?.assumingMemoryBound(to: Float.self)
             
             for frame in 0..<Int(frameCount) {
-                let sample = generateSample()
-                bufferPointer?[frame] = sample
+                let rawSample = generateSample()
+                let filteredSample = applyLowPassFilter(rawSample)
+                bufferPointer?[frame] = filteredSample
                 
                 // Increment phase
                 phase += 2.0 * Float.pi * frequency / sampleRate
@@ -93,5 +100,22 @@ class Synthesizer: NSObject {
     
     func setWaveform(_ type: WaveformType) {
         waveformType = type
+    }
+    
+    func setFilterCutoff(_ cutoff: Float) {
+        filterCutoff = cutoff
+        updateFilterCoefficients()
+    }
+    
+    private func updateFilterCoefficients() {
+        // Simple one-pole low-pass filter coefficient calculation
+        let rc = 1.0 / (2.0 * Float.pi * filterCutoff)
+        let dt = 1.0 / sampleRate
+        filterCoeff = dt / (rc + dt)
+    }
+    
+    private func applyLowPassFilter(_ input: Float) -> Float {
+        filterState += filterCoeff * (input - filterState)
+        return filterState
     }
 }
