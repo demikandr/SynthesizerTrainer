@@ -46,19 +46,21 @@ class Synthesizer: NSObject {
     private func renderAudio(frameCount: AVAudioFrameCount, audioBufferList: UnsafeMutablePointer<AudioBufferList>) -> OSStatus {
         let ablPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
         
-        for buffer in ablPointer {
-            let bufferPointer = buffer.mData?.assumingMemoryBound(to: Float.self)
+        // Generate samples once and copy to all channels
+        for frame in 0..<Int(frameCount) {
+            let rawSample = generateSample()
+            let filteredSample = applyLowPassFilter(rawSample)
             
-            for frame in 0..<Int(frameCount) {
-                let rawSample = generateSample()
-                let filteredSample = applyLowPassFilter(rawSample)
+            // Write same sample to all channels (mono to stereo)
+            for buffer in ablPointer {
+                let bufferPointer = buffer.mData?.assumingMemoryBound(to: Float.self)
                 bufferPointer?[frame] = filteredSample
-                
-                // Increment phase
-                phase += 2.0 * Float.pi * frequency / sampleRate
-                if phase >= 2.0 * Float.pi {
-                    phase -= 2.0 * Float.pi
-                }
+            }
+            
+            // Increment phase once per frame, not per channel
+            phase += 2.0 * Float.pi * frequency / sampleRate
+            if phase >= 2.0 * Float.pi {
+                phase -= 2.0 * Float.pi
             }
         }
         
@@ -67,16 +69,32 @@ class Synthesizer: NSObject {
     
     private func generateSample() -> Float {
         let sample: Float
+        let normalizedPhase = phase / (2.0 * Float.pi) // 0.0 to 1.0
         
         switch waveformType {
         case .sine:
             sample = sin(phase)
         case .square:
-            sample = phase < Float.pi ? 1.0 : -1.0
+            // Simple anti-aliasing by softening the transition
+            let transition: Float = 0.02 // Small transition zone
+            if normalizedPhase < (0.5 - transition) {
+                sample = 1.0
+            } else if normalizedPhase < (0.5 + transition) {
+                // Linear interpolation across transition
+                let t = (normalizedPhase - (0.5 - transition)) / (2.0 * transition)
+                sample = 1.0 - 2.0 * t
+            } else {
+                sample = -1.0
+            }
         case .sawtooth:
-            sample = (phase / Float.pi) - 1.0
+            // Ramp from -1 to 1
+            sample = (2.0 * normalizedPhase) - 1.0
         case .triangle:
-            sample = phase < Float.pi ? (2.0 * phase / Float.pi) - 1.0 : 3.0 - (2.0 * phase / Float.pi)
+            if normalizedPhase < 0.5 {
+                sample = (4.0 * normalizedPhase) - 1.0
+            } else {
+                sample = 3.0 - (4.0 * normalizedPhase)
+            }
         }
         
         return sample * amplitude
@@ -84,10 +102,14 @@ class Synthesizer: NSObject {
     
     func start() {
         isGenerating = true
+        // Reset filter state when starting
+        filterState = 0.0
     }
     
     func stop() {
         isGenerating = false
+        // Reset filter state when stopping
+        filterState = 0.0
     }
     
     func setFrequency(_ freq: Float) {
@@ -109,9 +131,14 @@ class Synthesizer: NSObject {
     
     private func updateFilterCoefficients() {
         // Simple one-pole low-pass filter coefficient calculation
-        let rc = 1.0 / (2.0 * Float.pi * filterCutoff)
+        // Clamp cutoff frequency to reasonable range
+        let clampedCutoff = max(20.0, min(filterCutoff, sampleRate * 0.45))
+        let rc = 1.0 / (2.0 * Float.pi * clampedCutoff)
         let dt = 1.0 / sampleRate
         filterCoeff = dt / (rc + dt)
+        
+        // Ensure coefficient is in valid range
+        filterCoeff = max(0.001, min(filterCoeff, 0.999))
     }
     
     private func applyLowPassFilter(_ input: Float) -> Float {

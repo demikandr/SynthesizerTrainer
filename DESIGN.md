@@ -107,6 +107,7 @@ Key Relationships:
 5. ✅ Implement low-pass filter processing
 6. Add simple envelope (attack/release)
 7. ✅ Create real-time parameter control system
+8. ✅ Fix audio synthesis quality and artifacts
 
 ### Audio System
 8. Implement audio buffer management
@@ -119,7 +120,7 @@ Key Relationships:
 13. Design main app layout in SwiftUI
 14. Create parameter control sliders
 15. Implement play/stop buttons for target and synth
-16. Add waveform visualization view
+16. Add real-time audio visualization (waveform display and spectrum analyzer)
 17. Create sound selection interface
 18. Implement basic match quality indicator
 
