@@ -2,168 +2,92 @@
 
 ## Project Overview
 
-**Project Name:** SynthesizerTrainer  
-**Platform:** iOS  
-**Target Audience:** Music producers, sound designers, and synthesizer enthusiasts looking to improve their sound design skills  
-**Goal:** Create an interactive learning application that teaches users how to recreate specific synthesizer sounds through hands-on experimentation  
+**Goal:** iOS app for learning synthesizer sound design through interactive sound matching challenges.
 
-## Core Concept
+**Core Concept:** Users listen to target sounds and recreate them using 3 simple synthesizer controls with real-time visual feedback.
 
-The app presents users with target sounds and provides a simplified synthesizer interface to recreate those sounds. Real-time visual feedback helps users understand the relationship between synthesizer parameters and the resulting audio characteristics.
-
-## Key Features
-
-### 1. Simplified Synthesizer Interface
-- **Oscillator Waveform Selection**: Sine, Square, Sawtooth, Triangle waves
-- **Low-Pass Filter Cutoff**: Frequency control with resonance
-- **ADSR Envelope**: Attack, Decay, Sustain, Release controls
-- **Additional Controls** (expandable):
-  - Filter resonance
-  - Oscillator pitch/detune
-  - LFO modulation depth and rate
-  - Distortion/overdrive amount
-
-### 2. Target Sound System
-- **Curated Sound Library**: Progressive difficulty levels from basic waveforms to complex patches
-- **Audio Playback**: High-quality reference audio for target sounds
-- **Sound Categories**:
-  - Basic waveforms and filtering
-  - Bass sounds
-  - Lead sounds
-  - Pad sounds
-  - Special effects
-
-### 3. Real-Time Audio Visualization
-- **Waveform Display**: Real-time oscilloscope view of current audio output
-- **Spectrum Analyzer**: Frequency domain representation showing harmonic content
-- **Target vs. Current Comparison**: Side-by-side or overlay visualization
-- **Visual Feedback Indicators**: Color-coded proximity indicators for how close the current sound matches the target
-
-### 4. Learning and Progress System
-- **Scoring Algorithm**: Measures similarity between target and user-created sounds
-- **Hint System**: Progressive hints revealing target parameter ranges
-- **Achievement System**: Unlock new sounds and difficulty levels
-- **Progress Tracking**: Statistics on completed challenges and improvement over time
-
-## Technical Architecture
+## MVP Features
 
 ### Audio Engine
-- **Core Audio/AVAudioEngine**: Real-time audio synthesis and processing
-- **Custom DSP**: Lightweight synthesizer implementation with standard components:
-  - Oscillators with multiple waveforms
-  - Biquad filters for low-pass filtering
-  - ADSR envelope generators
-  - Basic effects processing
-
-### Audio Analysis
-- **FFT Analysis**: Real-time frequency domain analysis for spectrum comparison
-- **Feature Extraction**: 
-  - Spectral centroid (brightness)
-  - Harmonic content analysis
-  - Envelope shape matching
-  - RMS level comparison
+- Single oscillator with waveform selection (sine, square, sawtooth, triangle)
+- Low-pass filter with cutoff frequency control
+- Simple amplitude envelope (attack/release)
+- Real-time audio synthesis using AVAudioEngine
 
 ### User Interface
-- **SwiftUI**: Modern, responsive interface design
-- **Real-time Updates**: 60fps visualization updates synchronized with audio
-- **Accessibility**: VoiceOver support for vision-impaired users
-- **Haptic Feedback**: Tactile feedback for parameter adjustments
+- Play button for target sound
+- Play button for current synthesized sound
+- Three control sliders (waveform, filter cutoff, envelope)
+- Basic waveform visualization display
+- Simple "match quality" indicator
 
-## User Experience Flow
+### Sound Library
+- 10 preset target sounds
+- Progressive difficulty (simple waveforms → filtered sounds → enveloped sounds)
+- Hardcoded audio files or parameter sets
 
-### 1. Onboarding
-- Brief tutorial explaining synthesizer basics
-- Introduction to each control with audio examples
-- Practice session with simple sound matching
+### Core Functionality
+- Audio playback and synthesis
+- Basic sound comparison algorithm
+- Parameter adjustment with real-time feedback
 
-### 2. Main Learning Loop
-1. **Sound Selection**: Choose from available target sounds
-2. **Listen Phase**: Play target sound multiple times
-3. **Recreation Phase**: Adjust synthesizer controls while hearing real-time feedback
-4. **Comparison Phase**: A/B test between target and current sound
-5. **Completion**: Achieve similarity threshold or request next hint
-6. **Progress**: Unlock new sounds and advance difficulty
+## Class Structure
 
-### 3. Advanced Features
-- **Free Play Mode**: Experiment without target sounds
-- **Custom Sound Creation**: Save and share user-created patches
-- **Challenge Mode**: Time-limited sound matching challenges
+### Audio Layer
+- `AudioEngine`: Core audio synthesis and playback management
+- `Synthesizer`: Single-oscillator synth with filter and envelope
+- `SoundMatcher`: Compares target vs current sound similarity
+- `TargetSound`: Model for target sounds with parameters/audio data
 
-## Success Metrics
+### UI Layer
+- `ContentView`: Main app screen with controls and visualization
+- `SynthControlView`: Individual parameter control sliders
+- `WaveformView`: Real-time audio waveform display
+- `SoundLibraryView`: Target sound selection interface
 
-### Educational Effectiveness
-- **Completion Rates**: Percentage of users completing sound challenges
-- **Learning Progression**: Time taken to complete increasingly difficult sounds
-- **Retention**: User return rates and session lengths
+### Data Layer
+- `SoundLibrary`: Manages collection of target sounds
+- `AppState`: Global app state and user progress
+- `AudioSettings`: Audio configuration and parameters
 
-### Technical Performance
-- **Audio Latency**: Sub-20ms round-trip latency for real-time interaction
-- **Battery Life**: Optimized performance for extended practice sessions
-- **Accuracy**: Reliable audio analysis and comparison algorithms
+## Feature Implementation List
 
-## Future Enhancements
+### Foundation
+1. Set up iOS project with audio permissions
+2. Implement basic AVAudioEngine setup
+3. Create single oscillator audio generation
+4. Add waveform selection (4 wave types)
+5. Implement low-pass filter processing
+6. Add simple envelope (attack/release)
+7. Create real-time parameter control system
 
-### Phase 2 Features
-- **Multi-oscillator Support**: More complex synthesis techniques
-- **Effects Processing**: Reverb, delay, chorus, distortion
-- **MIDI Support**: External controller integration
-- **Social Features**: Community sharing and challenges
+### Audio System
+8. Implement audio buffer management
+9. Add target sound playback system
+10. Create basic sound comparison algorithm
+11. Implement audio visualization (waveform display)
+12. Add audio session management for iOS
 
-### Phase 3 Features
-- **AI-Powered Suggestions**: Machine learning recommendations for parameter adjustments
-- **Advanced Synthesis**: FM, wavetable, and granular synthesis
-- **DAW Integration**: Export patches to popular music software
-- **Collaborative Learning**: Multiplayer sound design challenges
+### User Interface
+13. Design main app layout in SwiftUI
+14. Create parameter control sliders
+15. Implement play/stop buttons for target and synth
+16. Add waveform visualization view
+17. Create sound selection interface
+18. Implement basic match quality indicator
 
-## Technical Considerations
+### Content and Logic
+19. Create 10 target sounds (audio files or parameter sets)
+20. Implement sound library management
+21. Add basic scoring/matching logic
+22. Create app state management
+23. Implement sound progression system
 
-### Performance Requirements
-- **CPU Usage**: Efficient real-time audio processing
-- **Memory Management**: Optimized audio buffer handling
-- **Device Compatibility**: Support for iPhone 12 and newer, iPad Air and newer
-
-### Development Approach
-- **Modular Architecture**: Separate audio engine, UI, and analysis components
-- **Test-Driven Development**: Comprehensive unit tests for audio algorithms
-- **Continuous Integration**: Automated testing for audio quality and performance
-
-### Accessibility
-- **Visual Impairments**: Audio-first design with descriptive feedback
-- **Motor Impairments**: Large touch targets and gesture alternatives
-- **Hearing Impairments**: Visual-only learning modes with vibration feedback
-
-## Implementation Timeline
-
-### Phase 1 (MVP) - 3 months
-- Basic synthesizer with 3 controls
-- 10-15 target sounds
-- Simple waveform visualization
-- Core matching algorithm
-
-### Phase 2 - 2 months
-- Enhanced visualization (spectrum analyzer)
-- Expanded sound library (50+ sounds)
-- Progress tracking and achievements
-- Polish and optimization
-
-### Phase 3 - 2 months
-- Advanced features and effects
-- Social features and sharing
-- Performance optimization
-- App Store submission
-
-## Risk Assessment
-
-### Technical Risks
-- **Audio Latency**: May require extensive optimization on older devices
-- **Algorithm Accuracy**: Sound matching algorithm may need iterative refinement
-- **Battery Performance**: Real-time audio processing impact on device battery
-
-### Market Risks
-- **Niche Audience**: Limited to users interested in synthesizers
-- **Competition**: Existing music education apps may expand into this space
-- **Learning Curve**: Balancing accessibility with educational depth
-
-## Conclusion
-
-SynthesizerTrainer aims to democratize synthesizer education by providing an interactive, visual, and engaging way to learn sound design. The combination of simplified controls, real-time feedback, and progressive difficulty creates an optimal learning environment for developing practical synthesizer skills.
+### Integration and Polish
+24. Connect UI controls to audio parameters
+25. Add real-time visual feedback
+26. Implement app lifecycle management
+27. Add basic error handling
+28. Performance optimization for real-time audio
+29. Basic testing and debugging
+30. App icon and launch screen
