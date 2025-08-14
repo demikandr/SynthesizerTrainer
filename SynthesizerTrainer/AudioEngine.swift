@@ -5,6 +5,10 @@ class AudioEngine: ObservableObject {
     private let engine = AVAudioEngine()
     private var synthesizer: Synthesizer?
     
+    // Audio buffer management settings
+    private let preferredBufferSize: AVAudioFrameCount = 256
+    private let preferredSampleRate: Double = 44100.0
+    
     @Published var isPlaying = false
     
     init() {
@@ -15,8 +19,25 @@ class AudioEngine: ObservableObject {
     private func setupAudioSession() {
         do {
             let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+            
+            // Configure audio session for low-latency playback
+            try session.setCategory(.playback, mode: .default, options: [.mixWithOthers, .defaultToSpeaker])
+            
+            // Set preferred buffer duration for low latency
+            let bufferDuration = Double(preferredBufferSize) / preferredSampleRate
+            try session.setPreferredIOBufferDuration(bufferDuration)
+            
+            // Set preferred sample rate
+            try session.setPreferredSampleRate(preferredSampleRate)
+            
             try session.setActive(true)
+            
+            // Log actual audio session settings
+            print("Audio Session Configuration:")
+            print("- Sample Rate: \(session.sampleRate) Hz")
+            print("- Buffer Duration: \(session.ioBufferDuration) seconds")
+            print("- Output Latency: \(session.outputLatency) seconds")
+            
         } catch {
             print("Failed to setup audio session: \(error)")
         }
@@ -27,11 +48,27 @@ class AudioEngine: ObservableObject {
         
         guard let synthesizer = synthesizer else { return }
         
+        // Create audio format with our preferred settings
+        let audioFormat = AVAudioFormat(
+            standardFormatWithSampleRate: preferredSampleRate,
+            channels: 2 // Stereo output
+        )
+        
         engine.attach(synthesizer.sourceNode)
-        engine.connect(synthesizer.sourceNode, to: engine.mainMixerNode, format: nil)
+        engine.connect(synthesizer.sourceNode, to: engine.mainMixerNode, format: audioFormat)
+        
+        // Configure main mixer node
+        engine.mainMixerNode.outputVolume = 0.8 // Slightly lower to prevent clipping
         
         do {
+            // Prepare engine with buffer size
+            engine.prepare()
             try engine.start()
+            
+            print("Audio Engine Configuration:")
+            print("- Format: \(audioFormat?.description ?? "nil")")
+            print("- Running: \(engine.isRunning)")
+            
         } catch {
             print("Failed to start audio engine: \(error)")
         }
@@ -65,5 +102,41 @@ class AudioEngine: ObservableObject {
     
     func setReleaseTime(_ time: Float) {
         synthesizer?.setReleaseTime(time)
+    }
+    
+    // MARK: - Audio Buffer Management
+    
+    func getAudioLatency() -> TimeInterval {
+        let session = AVAudioSession.sharedInstance()
+        return session.outputLatency + session.ioBufferDuration
+    }
+    
+    func getCurrentSampleRate() -> Double {
+        return AVAudioSession.sharedInstance().sampleRate
+    }
+    
+    func getCurrentBufferSize() -> AVAudioFrameCount {
+        let session = AVAudioSession.sharedInstance()
+        return AVAudioFrameCount(session.ioBufferDuration * session.sampleRate)
+    }
+    
+    func restartAudioEngine() {
+        engine.stop()
+        setupAudioSession()
+        setupEngine()
+        
+        // Restore playing state if needed
+        if isPlaying {
+            startSynthesizer()
+        }
+    }
+    
+    deinit {
+        engine.stop()
+        do {
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Failed to deactivate audio session: \(error)")
+        }
     }
 }
