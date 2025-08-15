@@ -56,26 +56,31 @@
 Each feature must follow this strict development cycle:
 
 1. **Plan**: Update todo list and mark task as in_progress
-2. **Code**: Implement the feature following existing patterns
-3. **Build**: Compile the project using xcodebuild to catch compilation errors
-4. **Test**: Install and run the app in iOS Simulator
-5. **Verify**: Take screenshot and verify UI/functionality works as expected
-6. **Document**: Update design document to mark feature as completed
-7. **Commit**: Create meaningful git commit with detailed description
-8. **Push**: Push changes to GitHub repository
+2. **Verify Problem**: Take screenshot/test current state to confirm the issue exists
+3. **Code**: Implement the feature following existing patterns
+4. **Build**: Compile the project using xcodebuild to catch compilation errors
+5. **Test**: Install and run the app in iOS Simulator
+6. **Verify Fix**: Take screenshot and verify the problem is actually solved
+7. **Document**: Update design document to mark feature as completed
+8. **Commit**: Create meaningful git commit with detailed description
+9. **Push**: Push changes to GitHub repository
 
 ### Quality Gates
+- **Verify problems before fixing**: Always confirm issues exist by testing/screenshotting current state
 - **Never commit broken code**: Every commit must compile successfully
 - **Test before commit**: Every feature must be tested in simulator before committing
-- **Screenshot evidence**: Visual verification that features work as expected
+- **Screenshot evidence**: Visual verification that features work as expected before and after fixes
 - **Incremental progress**: One feature per commit to maintain clean history
+- **Double verification**: Both problem confirmation and solution verification required
 
 ### Testing Requirements
+- **Before Coding**: Take screenshot/test to verify the reported problem exists
 - Build project with xcodebuild for each change
 - Install updated app to iOS Simulator
 - Launch app and verify new functionality
-- Take screenshot showing working feature
+- **After Coding**: Take screenshot showing the fix actually works
 - Test user interactions (button presses, slider movements, etc.)
+- Verify edge cases and boundary conditions
 
 ## Class Dependencies
 
