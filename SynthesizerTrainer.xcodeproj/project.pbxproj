@@ -63,17 +63,49 @@
 			isa = PBXGroup;
 			children = (
 				9A000002293000000001 /* SynthesizerTrainerApp.swift */,
-				9A000004293000000001 /* ContentView.swift */,
-				9A000027293000000001 /* AudioEngine.swift */,
-				9A000029293000000001 /* Synthesizer.swift */,
-				9A000031293000000001 /* TargetSound.swift */,
-				9A000033293000000001 /* SoundLibrary.swift */,
-				9A000035293000000001 /* SoundMatcher.swift */,
+				9A000036293000000001 /* Views */,
+				9A000037293000000001 /* Audio */,
+				9A000038293000000001 /* Models */,
+				9A000039293000000001 /* Logic */,
 				9A000006293000000001 /* Assets.xcassets */,
 				9A000010293000000001 /* Info.plist */,
 				9A000015293000000001 /* Preview Content */,
 			);
 			path = SynthesizerTrainer;
+			sourceTree = "<group>";
+		};
+		9A000036293000000001 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9A000004293000000001 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9A000037293000000001 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				9A000027293000000001 /* AudioEngine.swift */,
+				9A000029293000000001 /* Synthesizer.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		9A000038293000000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9A000031293000000001 /* TargetSound.swift */,
+				9A000033293000000001 /* SoundLibrary.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9A000039293000000001 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				9A000035293000000001 /* SoundMatcher.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 		9A000015293000000001 /* Preview Content */ = {
