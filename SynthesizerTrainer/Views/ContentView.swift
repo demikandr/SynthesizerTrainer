@@ -13,79 +13,117 @@ struct ContentView: View {
     @State private var releaseTime: Double = 0.3
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 30) {
-            // Header
-            VStack {
+        VStack(spacing: 0) {
+            // Compact Header
+            HStack {
                 Image(systemName: "waveform")
-                    .imageScale(.large)
+                    .imageScale(.medium)
                     .foregroundStyle(.tint)
-                Text("SynthesizerTrainer")
-                    .font(.title)
-                Text("Audio synthesis learning app")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            
-            // Target Sound Section
-            if let targetSound = soundLibrary.currentTargetSound {
-                VStack(spacing: 15) {
-                    Text("Target Sound")
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("SynthesizerTrainer")
                         .font(.headline)
-                    
-                    VStack {
-                        Text(targetSound.name)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        Text(targetSound.description)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    // Target sound control buttons
-                    HStack(spacing: 20) {
-                        Button("◀") {
-                            _ = soundLibrary.getPreviousTargetSound()
-                        }
-                        .disabled(soundLibrary.targetSounds.first?.id == targetSound.id)
+                    Text("Audio synthesis learning app")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+            }
+            .padding(.horizontal)
+            .padding(.top, 10)
+            
+            // Main Content Area
+            HStack(spacing: 15) {
+                // Left Side - Target Sound
+                if let targetSound = soundLibrary.currentTargetSound {
+                    VStack(spacing: 8) {
+                        Text("Target Sound")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
                         
-                        Button(action: {
-                            if targetSoundPlayer.isPlaying {
-                                targetSoundPlayer.stopTargetSound()
-                            } else {
-                                targetSoundPlayer.playTargetSound(targetSound)
+                        VStack(spacing: 4) {
+                            Text(targetSound.name)
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                            Text(targetSound.description)
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        // Target sound controls - compact
+                        HStack(spacing: 8) {
+                            Button("◀") {
+                                _ = soundLibrary.getPreviousTargetSound()
                             }
-                        }) {
-                            Image(systemName: targetSoundPlayer.isPlaying ? "stop.fill" : "play.fill")
-                                .font(.title2)
-                                .foregroundColor(.white)
-                                .frame(width: 60, height: 60)
-                                .background(targetSoundPlayer.isPlaying ? Color.red : Color.blue)
-                                .clipShape(Circle())
+                            .disabled(soundLibrary.targetSounds.first?.id == targetSound.id)
+                            .font(.caption)
+                            
+                            Button(action: {
+                                if targetSoundPlayer.isPlaying {
+                                    targetSoundPlayer.stopTargetSound()
+                                } else {
+                                    targetSoundPlayer.playTargetSound(targetSound)
+                                }
+                            }) {
+                                Image(systemName: targetSoundPlayer.isPlaying ? "stop.fill" : "play.fill")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                                    .frame(width: 40, height: 40)
+                                    .background(targetSoundPlayer.isPlaying ? Color.red : Color.blue)
+                                    .clipShape(Circle())
+                            }
+                            
+                            Button("▶") {
+                                _ = soundLibrary.getNextTargetSound()
+                            }
+                            .disabled(soundLibrary.targetSounds.last?.id == targetSound.id)
+                            .font(.caption)
                         }
-                        
-                        Button("▶") {
-                            _ = soundLibrary.getNextTargetSound()
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.gray.opacity(0.08))
+                    .cornerRadius(8)
+                }
+                
+                // Right Side - Your Synthesizer
+                VStack(spacing: 8) {
+                    Text("Your Synthesizer")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                    
+                    // Play/Stop Button - smaller
+                    Button(action: {
+                        if audioEngine.isPlaying {
+                            audioEngine.stopSynthesizer()
+                        } else {
+                            audioEngine.startSynthesizer()
                         }
-                        .disabled(soundLibrary.targetSounds.last?.id == targetSound.id)
+                    }) {
+                        Image(systemName: audioEngine.isPlaying ? "stop.fill" : "play.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white)
+                            .frame(width: 40, height: 40)
+                            .background(audioEngine.isPlaying ? Color.red : Color.green)
+                            .clipShape(Circle())
                     }
                 }
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
+                .padding(12)
+                .frame(maxWidth: .infinity)
+                .background(Color.green.opacity(0.08))
+                .cornerRadius(8)
             }
+            .padding(.horizontal)
+            .padding(.top, 10)
             
-            // Match Quality Indicator
+            // Center - Match Quality (prominent)
             if let matchResult = soundMatcher.currentMatchResult,
                let targetSound = soundLibrary.currentTargetSound {
-                VStack(spacing: 10) {
+                VStack(spacing: 8) {
                     Text("Match Quality")
                         .font(.headline)
                     
-                    // Overall score with large percentage
                     Text("\(matchResult.percentage)%")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.system(size: 44, weight: .bold, design: .rounded))
                         .foregroundColor(matchResult.percentage >= 80 ? .green : 
                                        matchResult.percentage >= 60 ? .orange : .red)
                     
@@ -93,80 +131,72 @@ struct ContentView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     
-                    // Parameter breakdown
-                    HStack(spacing: 20) {
-                        VStack {
+                    // Parameter breakdown - horizontal
+                    HStack(spacing: 15) {
+                        VStack(spacing: 2) {
                             Text("Wave")
+                                .font(.caption)
                             Text("\(Int(matchResult.waveformMatch * 100))%")
                                 .font(.caption)
+                                .fontWeight(.medium)
                                 .foregroundColor(matchResult.waveformMatch >= 0.8 ? .green : .orange)
                         }
-                        VStack {
+                        VStack(spacing: 2) {
                             Text("Freq")
+                                .font(.caption)
                             Text("\(Int(matchResult.frequencyMatch * 100))%")
                                 .font(.caption)
+                                .fontWeight(.medium)
                                 .foregroundColor(matchResult.frequencyMatch >= 0.8 ? .green : .orange)
                         }
-                        VStack {
+                        VStack(spacing: 2) {
                             Text("Filter")
+                                .font(.caption)
                             Text("\(Int(matchResult.filterMatch * 100))%")
                                 .font(.caption)
+                                .fontWeight(.medium)
                                 .foregroundColor(matchResult.filterMatch >= 0.8 ? .green : .orange)
                         }
-                        VStack {
+                        VStack(spacing: 2) {
                             Text("Env")
+                                .font(.caption)
                             Text("\(Int(matchResult.envelopeMatch * 100))%")
                                 .font(.caption)
+                                .fontWeight(.medium)
                                 .foregroundColor(matchResult.envelopeMatch >= 0.8 ? .green : .orange)
                         }
                     }
-                    .padding(.horizontal)
                     
-                    // Hint text
+                    // Hint text - compact
                     if matchResult.overallScore < 0.9 {
                         Text(soundMatcher.getHint(
                             target: targetSound,
                             userWaveform: selectedWaveform,
-                            userFrequency: 440.0, // Fixed frequency for now
+                            userFrequency: 440.0,
                             userFilterCutoff: Float(filterCutoff),
-                            userAmplitude: 0.3 // Fixed amplitude
+                            userAmplitude: 0.3
                         ))
                         .font(.caption)
                         .foregroundColor(.blue)
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal)
+                        .lineLimit(2)
                     }
                 }
-                .padding()
-                .background(Color.blue.opacity(0.1))
-                .cornerRadius(10)
+                .padding(15)
+                .frame(maxWidth: .infinity)
+                .background(Color.blue.opacity(0.08))
+                .cornerRadius(12)
+                .padding(.horizontal)
+                .padding(.top, 15)
             }
             
-            // Synthesizer Controls
-            VStack(spacing: 25) {
-                Text("Your Synthesizer")
-                    .font(.headline)
-                
-                // Play/Stop Button
-                Button(action: {
-                    if audioEngine.isPlaying {
-                        audioEngine.stopSynthesizer()
-                    } else {
-                        audioEngine.startSynthesizer()
-                    }
-                }) {
-                    Image(systemName: audioEngine.isPlaying ? "stop.fill" : "play.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(width: 80, height: 80)
-                        .background(audioEngine.isPlaying ? Color.red : Color.green)
-                        .clipShape(Circle())
-                }
-                
-                // Waveform Selection
-                VStack {
+            // Bottom - Controls (compact)
+            VStack(spacing: 12) {
+                // Waveform Selection - compact
+                VStack(spacing: 6) {
                     Text("Waveform")
-                        .font(.headline)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
                     Picker("Waveform", selection: $selectedWaveform) {
                         Text("Sine").tag(WaveformType.sine)
                         Text("Square").tag(WaveformType.square)
@@ -176,34 +206,53 @@ struct ContentView: View {
                     .pickerStyle(SegmentedPickerStyle())
                 }
                 
-                // Filter Cutoff
-                VStack {
-                    Text("Filter Cutoff: \(Int(filterCutoff)) Hz")
-                        .font(.headline)
+                // Filter Cutoff - compact
+                VStack(spacing: 4) {
+                    Text("Adjust filter cutoff higher")
+                        .font(.caption)
+                        .foregroundColor(.blue)
+                    HStack {
+                        Text("Filter")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                        Spacer()
+                        Text("\(Int(filterCutoff)) Hz")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                     Slider(value: $filterCutoff, in: 100...5000, step: 10)
                         .accentColor(.blue)
                 }
                 
-                // Envelope controls
+                // Envelope controls - very compact
                 HStack(spacing: 20) {
-                    VStack {
-                        Text("Attack: \(Int(attackTime * 1000))ms")
-                            .font(.subheadline)
+                    VStack(spacing: 4) {
+                        Text("Attack")
+                            .font(.caption)
+                            .fontWeight(.medium)
+                        Text("\(Int(attackTime * 1000))ms")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
                         Slider(value: $attackTime, in: 0.01...0.5, step: 0.01)
                             .accentColor(.purple)
                     }
-                    VStack {
-                        Text("Release: \(Int(releaseTime * 1000))ms")
-                            .font(.subheadline)
+                    VStack(spacing: 4) {
+                        Text("Release")
+                            .font(.caption)
+                            .fontWeight(.medium)
+                        Text("\(Int(releaseTime * 1000))ms")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
                         Slider(value: $releaseTime, in: 0.1...2.0, step: 0.05)
                             .accentColor(.purple)
                     }
                 }
             }
             .padding(.horizontal)
-            }
+            .padding(.bottom, 10)
+            
+            Spacer(minLength: 0)
         }
-        .padding()
         .onChange(of: selectedWaveform) {
             audioEngine.setWaveform(selectedWaveform)
             updateMatchScore()
