@@ -46,9 +46,9 @@ class SoundMatcher: ObservableObject {
             targetRelease: target.releaseTime, userRelease: userReleaseTime
         )
         
-        // Calculate weighted overall score
-        let weights: [Float] = [0.25, 0.2, 0.25, 0.15, 0.15] // waveform, freq, filter, amp, envelope
-        let scores = [waveformMatch, frequencyMatch, filterMatch, amplitudeMatch, envelopeMatch]
+        // Calculate weighted overall score (excluding amplitude)
+        let weights: [Float] = [0.3, 0.25, 0.3, 0.15] // waveform, freq, filter, envelope
+        let scores = [waveformMatch, frequencyMatch, filterMatch, envelopeMatch]
         
         let overallScore = zip(weights, scores).reduce(0) { result, pair in
             result + (pair.0 * pair.1)
@@ -153,11 +153,6 @@ class SoundMatcher: ObservableObject {
         if abs(target.filterCutoff - userFilterCutoff) > 300 {
             let direction = target.filterCutoff > userFilterCutoff ? "higher" : "lower"
             hints.append("Adjust filter cutoff \(direction)")
-        }
-        
-        if abs(target.amplitude - userAmplitude) > 0.15 {
-            let direction = target.amplitude > userAmplitude ? "louder" : "quieter"
-            hints.append("Make it \(direction)")
         }
         
         return hints.isEmpty ? "You're very close!" : hints.joined(separator: ", ")

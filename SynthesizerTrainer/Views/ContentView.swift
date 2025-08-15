@@ -13,7 +13,8 @@ struct ContentView: View {
     @State private var releaseTime: Double = 0.3
     
     var body: some View {
-        VStack(spacing: 30) {
+        ScrollView {
+            VStack(spacing: 30) {
             // Header
             VStack {
                 Image(systemName: "waveform")
@@ -93,7 +94,7 @@ struct ContentView: View {
                         .foregroundColor(.secondary)
                     
                     // Parameter breakdown
-                    HStack(spacing: 15) {
+                    HStack(spacing: 20) {
                         VStack {
                             Text("Wave")
                             Text("\(Int(matchResult.waveformMatch * 100))%")
@@ -113,12 +114,6 @@ struct ContentView: View {
                                 .foregroundColor(matchResult.filterMatch >= 0.8 ? .green : .orange)
                         }
                         VStack {
-                            Text("Vol")
-                            Text("\(Int(matchResult.amplitudeMatch * 100))%")
-                                .font(.caption)
-                                .foregroundColor(matchResult.amplitudeMatch >= 0.8 ? .green : .orange)
-                        }
-                        VStack {
                             Text("Env")
                             Text("\(Int(matchResult.envelopeMatch * 100))%")
                                 .font(.caption)
@@ -134,7 +129,7 @@ struct ContentView: View {
                             userWaveform: selectedWaveform,
                             userFrequency: 440.0, // Fixed frequency for now
                             userFilterCutoff: Float(filterCutoff),
-                            userAmplitude: Float(amplitude)
+                            userAmplitude: 0.3 // Fixed amplitude
                         ))
                         .font(.caption)
                         .foregroundColor(.blue)
@@ -146,8 +141,6 @@ struct ContentView: View {
                 .background(Color.blue.opacity(0.1))
                 .cornerRadius(10)
             }
-            
-            Spacer()
             
             // Synthesizer Controls
             VStack(spacing: 25) {
@@ -191,14 +184,6 @@ struct ContentView: View {
                         .accentColor(.blue)
                 }
                 
-                // Amplitude
-                VStack {
-                    Text("Volume: \(Int(amplitude * 100))%")
-                        .font(.headline)
-                    Slider(value: $amplitude, in: 0.0...1.0, step: 0.01)
-                        .accentColor(.orange)
-                }
-                
                 // Envelope controls
                 HStack(spacing: 20) {
                     VStack {
@@ -216,8 +201,7 @@ struct ContentView: View {
                 }
             }
             .padding(.horizontal)
-            
-            Spacer()
+            }
         }
         .padding()
         .onChange(of: selectedWaveform) {
@@ -226,10 +210,6 @@ struct ContentView: View {
         }
         .onChange(of: filterCutoff) {
             audioEngine.setFilterCutoff(Float(filterCutoff))
-            updateMatchScore()
-        }
-        .onChange(of: amplitude) {
-            audioEngine.setAmplitude(Float(amplitude))
             updateMatchScore()
         }
         .onChange(of: attackTime) {
@@ -244,7 +224,7 @@ struct ContentView: View {
             // Set initial values
             audioEngine.setWaveform(selectedWaveform)
             audioEngine.setFilterCutoff(Float(filterCutoff))
-            audioEngine.setAmplitude(Float(amplitude))
+            audioEngine.setAmplitude(0.3) // Fixed volume
             audioEngine.setAttackTime(Float(attackTime))
             audioEngine.setReleaseTime(Float(releaseTime))
             updateMatchScore()
@@ -259,7 +239,7 @@ struct ContentView: View {
             userWaveform: selectedWaveform,
             userFrequency: 440.0, // Fixed frequency for now
             userFilterCutoff: Float(filterCutoff),
-            userAmplitude: Float(amplitude),
+            userAmplitude: 0.3, // Fixed amplitude - not compared
             userAttackTime: Float(attackTime),
             userReleaseTime: Float(releaseTime)
         )
