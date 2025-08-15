@@ -62,8 +62,9 @@ Each feature must follow this strict development cycle:
 5. **Test**: Install and run the app in iOS Simulator
 6. **Verify Fix**: Take screenshot and verify the problem is actually solved
 7. **Document**: Update design document to mark feature as completed
-8. **Commit**: Create meaningful git commit with detailed description
-9. **Push**: Push changes to GitHub repository
+8. **Screenshot**: Automatically capture app screenshots (initial state and scrolled state)
+9. **Commit**: Create meaningful git commit with detailed description and visual evidence (omit Co-Authored-By comments)
+10. **Push**: Push changes to GitHub repository
 
 ### Quality Gates
 - **Verify problems before fixing**: Always confirm issues exist by testing/screenshotting current state
@@ -81,6 +82,40 @@ Each feature must follow this strict development cycle:
 - **After Coding**: Take screenshot showing the fix actually works
 - Test user interactions (button presses, slider movements, etc.)
 - Verify edge cases and boundary conditions
+
+### Screenshot Workflow
+Automated screenshot capture tracks visual changes for every commit:
+
+**Setup (one-time):**
+```bash
+# Install git hooks for automatic screenshot capture
+./setup_git_hooks.sh
+```
+
+**Automatic Process:**
+- Git pre-commit hook automatically triggers before each commit
+- Builds app if not already built
+- Launches app in iOS Simulator (iPhone 16)
+- Captures screenshot of app main screen as it loads
+- Screenshots saved with timestamp and commit hash: `screenshots/YYYYMMDD_HHMMSS_commithash_app_state.png`
+- Screenshots automatically added to the commit
+
+**Manual Capture:**
+```bash
+# Capture screenshots manually when needed
+./capture_screenshots.sh
+```
+
+**Screenshot Naming Convention:**
+- Format: `YYYYMMDD_HHMMSS_<commit>_<state>.png`
+- States: `initial_state`, `scrolled_state`
+- Example: `20241201_143052_a1b2c3d_initial_state.png`
+
+**Benefits:**
+- Visual regression detection
+- UI evolution tracking
+- Commit documentation with actual app screenshots
+- Automatic integration with development workflow
 
 ## Class Dependencies
 
