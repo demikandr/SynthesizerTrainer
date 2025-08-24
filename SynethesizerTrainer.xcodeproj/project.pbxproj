@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0823E3C02E56105900E65BE2 /* CLAUDE.md in Resources */ = {isa = PBXBuildFile; fileRef = 0823E3BF2E56105300E65BE2 /* CLAUDE.md */; };
+		0823E3C22E5610C800E65BE2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0823E3C12E5610BE00E65BE2 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		0823E39F2E560F9800E65BE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +32,8 @@
 		0823E38C2E560F9600E65BE2 /* SynethesizerTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynethesizerTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0823E39E2E560F9800E65BE2 /* SynethesizerTrainerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynethesizerTrainerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0823E3A82E560F9800E65BE2 /* SynethesizerTrainerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynethesizerTrainerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0823E3BF2E56105300E65BE2 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
+		0823E3C12E5610BE00E65BE2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +82,8 @@
 		0823E3832E560F9600E65BE2 = {
 			isa = PBXGroup;
 			children = (
+				0823E3C12E5610BE00E65BE2 /* README.md */,
+				0823E3BF2E56105300E65BE2 /* CLAUDE.md */,
 				0823E38E2E560F9600E65BE2 /* SynethesizerTrainer */,
 				0823E3A12E560F9800E65BE2 /* SynethesizerTrainerTests */,
 				0823E3AB2E560F9800E65BE2 /* SynethesizerTrainerUITests */,
@@ -195,6 +204,10 @@
 			);
 			mainGroup = 0823E3832E560F9600E65BE2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0823E3BB2E56100A00E65BE2 /* XCRemoteSwiftPackageReference "AudioKit" */,
+				0823E3BC2E56101900E65BE2 /* XCRemoteSwiftPackageReference "AudioKitUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0823E38D2E560F9600E65BE2 /* Products */;
 			projectDirPath = "";
@@ -212,6 +225,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0823E3C22E5610C800E65BE2 /* README.md in Resources */,
+				0823E3C02E56105900E65BE2 /* CLAUDE.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +573,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0823E3BB2E56100A00E65BE2 /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.5;
+			};
+		};
+		0823E3BC2E56101900E65BE2 /* XCRemoteSwiftPackageReference "AudioKitUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKitUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 0823E3842E560F9600E65BE2 /* Project object */;
 }
