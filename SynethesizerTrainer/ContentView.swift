@@ -1,61 +1,62 @@
-//
-//  ContentView.swift
-//  SynethesizerTrainer
-//
-//  Created by Dmitry shchelchkov on 20.08.2025.
-//
-
 import SwiftUI
-import SwiftData
+import AudioKit
+import SoundpipeAudioKit
+import OSLog
+
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @State private var isPlaying = false
+    private var logger = Logger()
+    private var engine = AudioEngine()
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
+        VStack(spacing: 40) {
+            Text("Simple Audio Test")
+                .font(.largeTitle)
+                .padding()
+            
+            Button(action: {
+                if isPlaying {
+                    isPlaying = false
+                } else {
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
+                    // 2. Create the oscillator
+                    let oscillator = Oscillator()
+                    oscillator.frequency = 440
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+                    // 3. Connect the oscillator to the engine's output
+                    engine.output = oscillator
+
+                    do {
+                        // 4. Start the engine
+                        try engine.start()
+                        logger.info("engine started")
+                        
+                        // 5. Start the oscillator
+                        oscillator.start()
+                        logger.info("oscilator started")
+
+                    } catch {
+                        logger.error("AudioKit did not start! \(error)")
+                    }
+                    isPlaying = true
+                }
+            }) {
+                Text(isPlaying ? "Stop Tone" : "Play Tone")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 200)
+                    .background(isPlaying ? Color.red : Color.green)
+                    .cornerRadius(10)
             }
+            
+            Text("Frequency: 440 Hz")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
