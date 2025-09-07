@@ -98,99 +98,65 @@ Lesson selector view allow to select the module and lesson. You can select the l
 
 *Mock is to be created*
 
-## Implementation Plan for Exercise View Components
+## Implementation Plan for Exercise View Components (Vertical Approach)
 
-### Phase 1: Synth Parameters Section
-1. **Create parameter models**
-   - Define data models for each synth parameter type
-   - Implement Observable properties for real-time updates
-   - Add parameter validation and constraints
+### Phase 1: Basic Synth End-to-End
+1. **Create SynthEngine with basic wave only**
+   - AudioKit synthesizer node with basic waveform parameter
+   - play(pitch) and stop(pitch) methods
 
-2. **Build individual parameter views**
-   - **BasicWaveView**: Waveform selector (sine, square, saw, triangle)
-   - **EnvelopeView**: ADSR controls with visual envelope display
-   - **FiltersView**: Filter type selector and cutoff/resonance controls
-   - **LFOView**: Rate, depth, and destination controls
+2. **Build BasicWaveView**  
+   - Simple waveform selector (sine, square, saw, triangle)
+   - Connected to SynthEngine
 
-3. **Create SynthParamsContainerView**
-   - Implement tab-based navigation between parameter sections
-   - Add smooth transitions between tabs
-   - Ensure parameter changes are immediately reflected in sound
+3. **Build KeyboardView**
+   - Piano keyboard using AudioKitUI
+   - Connected to SynthEngine play/stop methods
 
-4. **Connect to SynthEngine**
-   - Bind UI controls to SynthEngine published properties
-   - Implement bidirectional data flow
-   - Add real-time parameter value display
+4. **Create basic ExerciseView**
+   - Stack BasicWaveView and KeyboardView vertically
+   - Basic "Play Target" button (placeholder)
 
-### Phase 2: Keyboard Component
-1. **Build KeyboardView**
-   - Create piano keyboard layout using AudioKitUI components
-   - Implement touch/click handling for note triggering
-   - Add visual feedback for pressed keys
+### Phase 2: Add Envelope Parameters
+1. **Extend SynthEngine with envelope**
+   - Add ADSR parameters to synthesizer
 
-2. **Implement note handling**
-   - Connect keyboard to SynthEngine play/stop methods
-   - Add polyphonic support if required
-   - Implement velocity sensitivity
+2. **Build EnvelopeView**
+   - ADSR controls with visual envelope display
+   - Add to SynthParamsContainerView with tabs
 
-3. **Add keyboard features**
-   - Octave shift controls
-   - Note labels display toggle
-   - Keyboard size adjustment for different screen sizes
+3. **Update ExerciseView**
+   - Replace BasicWaveView with SynthParamsContainerView
 
-### Phase 3: Integration into Exercise View
-1. **Create ExerciseViewModel**
-   - Manage state for all exercise components
-   - Handle communication between components
-   - Implement exercise flow logic
+### Phase 3: Add Filters and LFO
+1. **Extend SynthEngine with filters and LFO**
+   - Add filter and LFO parameters
 
-2. **Assemble ExerciseView**
-   - Stack all components vertically
-   - Add proper spacing and padding
-   - Implement scroll view if needed for smaller screens
+2. **Build FiltersView and LFOView**
+   - Filter type selector and cutoff/resonance controls
+   - LFO rate, depth, and destination controls
 
-3. **Connect components**
-   - Wire up target sound playback
-   - Sync keyboard and parameter changes to sound output
-   - Add exercise state management
+3. **Complete SynthParamsContainerView**
+   - All four parameter tabs with smooth transitions
 
-4. **Add exercise controls**
-   - Implement "Play Target" button functionality
-   - Add "Submit" button with validation
-   - Create reset functionality
+### Phase 4: Sound Visualizer
+1. **Create WaveformProvider and WaveformVisualizerView**
+   - Real-time waveform rendering
+   - Connect to SynthEngine output
 
-### Phase 4: Sound Visualizer Component
-1. **Create WaveformProvider utility**
-   - Implement AudioKit Node tap for audio output capture
-   - Create buffer management for real-time waveform data
-   - Add frequency normalization to stabilize visualization
+2. **Add to ExerciseView**
+   - Insert visualizer between target controls and synth params
 
-2. **Build WaveformVisualizerView**
-   - Create SwiftUI view with AudioKitUI waveform components
-   - Implement real-time waveform rendering
-   - Add styling to match the app design
-   - Ensure responsive layout for different screen sizes
+### Phase 5: Exercise Logic and Polish
+1. **Add LessonEngine**
+   - Target sound management and score calculation
 
-3. **Integrate with audio pipeline**
-   - Connect WaveformProvider to SynthEngine output
-   - Add support for visualizing both target and user sounds
-   - Implement smooth transitions between sound sources
+2. **Complete exercise controls**
+   - Functional "Play Target" and "Submit" buttons
+   - Exercise state management
 
-### Phase 5: Testing and Polish
-1. **Test audio pipeline**
-   - Verify low-latency response
-   - Test parameter smoothing
-   - Ensure no audio glitches
-
-2. **UI/UX refinement**
-   - Add animations for parameter changes
-   - Implement haptic feedback where appropriate
-   - Polish visual design and transitions
-
-3. **Performance optimization**
-   - Profile and optimize waveform rendering
-   - Minimize UI redraws
-   - Optimize memory usage for audio buffers
+3. **UI polish and testing**
+   - Animations, performance optimization, thorough testing
 
 ## Theory view
 
