@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct SynthView<T: SynthEngineProtocol>: View {
-    @StateObject var synthEngine: T
+struct SynthKeyboardView<T: SynthEngineProtocol>: View {
+    @ObservedObject var synthEngine: T
     @State private var isPlaying = false
     
     var body: some View {
@@ -9,17 +9,6 @@ struct SynthView<T: SynthEngineProtocol>: View {
             Text("SynthEngine Test")
                 .font(.largeTitle)
                 .padding()
-            
-            Picker("Waveform", selection: $synthEngine.waveform) {
-                ForEach(WaveformType.allCases, id: \.self) { waveform in
-                    Text(waveform.rawValue).tag(waveform)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding()
-            .onChange(of: synthEngine.waveform) { _, newValue in
-                synthEngine.updateWaveform(newValue)
-            }
             
             Button(action: {
                 if isPlaying {
@@ -47,5 +36,5 @@ struct SynthView<T: SynthEngineProtocol>: View {
 }
 
 #Preview {
-    SynthView(synthEngine: SynthEngineImpl())
+    SynthKeyboardView(synthEngine: SynthEngineImpl())
 }

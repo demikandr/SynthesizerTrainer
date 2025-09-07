@@ -4,7 +4,7 @@ import SwiftUI
 struct SynethesizerTrainerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ExcerciseView()
         }
     }
 }
