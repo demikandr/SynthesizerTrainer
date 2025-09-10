@@ -5,7 +5,7 @@ import OSLog
 
 // TODO: add some visualization for Synth initialization as it is slow for PolyphonicSynthEngine
 struct ExcerciseView: View {
-    @StateObject var synthEngine = SimpleSynthEngineImpl()
+    @StateObject var synthEngine = PolyphonicSynthEngineImpl<VoiceImpl>()
     
     var body: some View {
         VStack(spacing: 40) {

@@ -9,32 +9,15 @@
 /* Begin PBXBuildFile section */
 		080DB1C32E6E44A2000ABA45 /* SporthAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 080DB1C22E6E44A2000ABA45 /* SporthAudioKit */; };
 		080DB1C62E6E44CE000ABA45 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = 080DB1C52E6E44CE000ABA45 /* AudioKitEX */; };
+		080DB1EA2E71D7D9000ABA45 /* Keyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 080DB1E92E71D7D9000ABA45 /* Keyboard */; };
+		080DB2042E720CE6000ABA45 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 080DB2032E720CE6000ABA45 /* Tonic */; };
 		0823E3C02E56105900E65BE2 /* CLAUDE.md in Resources */ = {isa = PBXBuildFile; fileRef = 0823E3BF2E56105300E65BE2 /* CLAUDE.md */; };
 		0823E3C22E5610C800E65BE2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0823E3C12E5610BE00E65BE2 /* README.md */; };
 		0888F07A2E68399C0098E0ED /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0888F0792E68399C0098E0ED /* SoundpipeAudioKit */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0823E39F2E560F9800E65BE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0823E3842E560F9600E65BE2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0823E38B2E560F9600E65BE2;
-			remoteInfo = SynethesizerTrainer;
-		};
-		0823E3A92E560F9800E65BE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0823E3842E560F9600E65BE2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0823E38B2E560F9600E65BE2;
-			remoteInfo = SynethesizerTrainer;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		0823E38C2E560F9600E65BE2 /* SynethesizerTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynethesizerTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0823E39E2E560F9800E65BE2 /* SynethesizerTrainerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynethesizerTrainerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0823E3A82E560F9800E65BE2 /* SynethesizerTrainerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SynethesizerTrainerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0823E38C2E560F9600E65BE2 /* SynthesizerTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SynthesizerTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0823E3BF2E56105300E65BE2 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
 		0823E3C12E5610BE00E65BE2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,22 +36,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				080DB1C62E6E44CE000ABA45 /* AudioKitEX in Frameworks */,
+				080DB1EA2E71D7D9000ABA45 /* Keyboard in Frameworks */,
 				080DB1C32E6E44A2000ABA45 /* SporthAudioKit in Frameworks */,
+				080DB2042E720CE6000ABA45 /* Tonic in Frameworks */,
 				0888F07A2E68399C0098E0ED /* SoundpipeAudioKit in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0823E39B2E560F9800E65BE2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0823E3A52E560F9800E65BE2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,9 +59,7 @@
 		0823E38D2E560F9600E65BE2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0823E38C2E560F9600E65BE2 /* SynethesizerTrainer.app */,
-				0823E39E2E560F9800E65BE2 /* SynethesizerTrainerTests.xctest */,
-				0823E3A82E560F9800E65BE2 /* SynethesizerTrainerUITests.xctest */,
+				0823E38C2E560F9600E65BE2 /* SynthesizerTrainer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0823E38B2E560F9600E65BE2 /* SynethesizerTrainer */ = {
+		0823E38B2E560F9600E65BE2 /* SynthesizerTrainer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0823E3B22E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynethesizerTrainer" */;
+			buildConfigurationList = 0823E3B22E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynthesizerTrainer" */;
 			buildPhases = (
 				0823E3882E560F9600E65BE2 /* Sources */,
 				0823E3892E560F9600E65BE2 /* Frameworks */,
@@ -113,55 +82,17 @@
 			fileSystemSynchronizedGroups = (
 				0823E38E2E560F9600E65BE2 /* SynthesizerTrainer */,
 			);
-			name = SynethesizerTrainer;
+			name = SynthesizerTrainer;
 			packageProductDependencies = (
 				0888F0792E68399C0098E0ED /* SoundpipeAudioKit */,
 				080DB1C22E6E44A2000ABA45 /* SporthAudioKit */,
 				080DB1C52E6E44CE000ABA45 /* AudioKitEX */,
+				080DB1E92E71D7D9000ABA45 /* Keyboard */,
+				080DB2032E720CE6000ABA45 /* Tonic */,
 			);
 			productName = SynethesizerTrainer;
-			productReference = 0823E38C2E560F9600E65BE2 /* SynethesizerTrainer.app */;
+			productReference = 0823E38C2E560F9600E65BE2 /* SynthesizerTrainer.app */;
 			productType = "com.apple.product-type.application";
-		};
-		0823E39D2E560F9800E65BE2 /* SynethesizerTrainerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0823E3B52E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynethesizerTrainerTests" */;
-			buildPhases = (
-				0823E39A2E560F9800E65BE2 /* Sources */,
-				0823E39B2E560F9800E65BE2 /* Frameworks */,
-				0823E39C2E560F9800E65BE2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0823E3A02E560F9800E65BE2 /* PBXTargetDependency */,
-			);
-			name = SynethesizerTrainerTests;
-			packageProductDependencies = (
-			);
-			productName = SynethesizerTrainerTests;
-			productReference = 0823E39E2E560F9800E65BE2 /* SynethesizerTrainerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		0823E3A72E560F9800E65BE2 /* SynethesizerTrainerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0823E3B82E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynethesizerTrainerUITests" */;
-			buildPhases = (
-				0823E3A42E560F9800E65BE2 /* Sources */,
-				0823E3A52E560F9800E65BE2 /* Frameworks */,
-				0823E3A62E560F9800E65BE2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0823E3AA2E560F9800E65BE2 /* PBXTargetDependency */,
-			);
-			name = SynethesizerTrainerUITests;
-			packageProductDependencies = (
-			);
-			productName = SynethesizerTrainerUITests;
-			productReference = 0823E3A82E560F9800E65BE2 /* SynethesizerTrainerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -175,14 +106,6 @@
 				TargetAttributes = {
 					0823E38B2E560F9600E65BE2 = {
 						CreatedOnToolsVersion = 16.2;
-					};
-					0823E39D2E560F9800E65BE2 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 0823E38B2E560F9600E65BE2;
-					};
-					0823E3A72E560F9800E65BE2 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 0823E38B2E560F9600E65BE2;
 					};
 				};
 			};
@@ -201,15 +124,15 @@
 				0888F0782E6839800098E0ED /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
 				080DB1C12E6E44A2000ABA45 /* XCRemoteSwiftPackageReference "SporthAudioKit" */,
 				080DB1C42E6E44CE000ABA45 /* XCRemoteSwiftPackageReference "AudioKitEX" */,
+				080DB1E82E71D7D9000ABA45 /* XCRemoteSwiftPackageReference "Keyboard" */,
+				080DB2022E720CE6000ABA45 /* XCRemoteSwiftPackageReference "Tonic" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0823E38D2E560F9600E65BE2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0823E38B2E560F9600E65BE2 /* SynethesizerTrainer */,
-				0823E39D2E560F9800E65BE2 /* SynethesizerTrainerTests */,
-				0823E3A72E560F9800E65BE2 /* SynethesizerTrainerUITests */,
+				0823E38B2E560F9600E65BE2 /* SynthesizerTrainer */,
 			);
 		};
 /* End PBXProject section */
@@ -224,20 +147,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0823E39C2E560F9800E65BE2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0823E3A62E560F9800E65BE2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -248,34 +157,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0823E39A2E560F9800E65BE2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0823E3A42E560F9800E65BE2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0823E3A02E560F9800E65BE2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0823E38B2E560F9600E65BE2 /* SynethesizerTrainer */;
-			targetProxy = 0823E39F2E560F9800E65BE2 /* PBXContainerItemProxy */;
-		};
-		0823E3AA2E560F9800E65BE2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0823E38B2E560F9600E65BE2 /* SynethesizerTrainer */;
-			targetProxy = 0823E3A92E560F9800E65BE2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		0823E3B02E560F9800E65BE2 /* Debug */ = {
@@ -421,7 +303,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynethesizerTrainer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynthesizerTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -449,79 +331,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynethesizerTrainer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynthesizerTrainer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		0823E3B62E560F9800E65BE2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynethesizerTrainerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SynethesizerTrainer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SynethesizerTrainer";
-			};
-			name = Debug;
-		};
-		0823E3B72E560F9800E65BE2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynethesizerTrainerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SynethesizerTrainer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SynethesizerTrainer";
-			};
-			name = Release;
-		};
-		0823E3B92E560F9800E65BE2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynethesizerTrainerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SynethesizerTrainer;
-			};
-			name = Debug;
-		};
-		0823E3BA2E560F9800E65BE2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.onedollarapp.RightSideSpatialAudio.SynethesizerTrainerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SynethesizerTrainer;
 			};
 			name = Release;
 		};
@@ -537,29 +351,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0823E3B22E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynethesizerTrainer" */ = {
+		0823E3B22E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynthesizerTrainer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0823E3B32E560F9800E65BE2 /* Debug */,
 				0823E3B42E560F9800E65BE2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0823E3B52E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynethesizerTrainerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0823E3B62E560F9800E65BE2 /* Debug */,
-				0823E3B72E560F9800E65BE2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0823E3B82E560F9800E65BE2 /* Build configuration list for PBXNativeTarget "SynethesizerTrainerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0823E3B92E560F9800E65BE2 /* Debug */,
-				0823E3BA2E560F9800E65BE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -581,6 +377,22 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.6.2;
+			};
+		};
+		080DB1E82E71D7D9000ABA45 /* XCRemoteSwiftPackageReference "Keyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/Keyboard.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
+		080DB2022E720CE6000ABA45 /* XCRemoteSwiftPackageReference "Tonic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/Tonic.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
 			};
 		};
 		0823E3BB2E56100A00E65BE2 /* XCRemoteSwiftPackageReference "AudioKit" */ = {
@@ -619,6 +431,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 080DB1C42E6E44CE000ABA45 /* XCRemoteSwiftPackageReference "AudioKitEX" */;
 			productName = AudioKitEX;
+		};
+		080DB1E92E71D7D9000ABA45 /* Keyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 080DB1E82E71D7D9000ABA45 /* XCRemoteSwiftPackageReference "Keyboard" */;
+			productName = Keyboard;
+		};
+		080DB2032E720CE6000ABA45 /* Tonic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 080DB2022E720CE6000ABA45 /* XCRemoteSwiftPackageReference "Tonic" */;
+			productName = Tonic;
 		};
 		0888F0792E68399C0098E0ED /* SoundpipeAudioKit */ = {
 			isa = XCSwiftPackageProductDependency;

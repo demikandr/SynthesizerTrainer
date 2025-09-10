@@ -1,34 +1,20 @@
 import SwiftUI
+import AudioKit
+import Keyboard
 
 struct SynthKeyboardView<T: SynthEngineProtocol>: View {
     @ObservedObject var synthEngine: T
-    @State private var isPlaying = false
+    @State private var pressedKeys: Set<MIDINoteNumber> = []
     
     var body: some View {
-        VStack(spacing: 40) {
-            Text("SynthEngine Test")
-                .font(.largeTitle)
-                .padding()
+        VStack {
+            Keyboard(layout: .piano(pitchRange: Pitch(intValue:49) ... Pitch(intValue: 72)),
+                     noteOn: {(pitch, _) in synthEngine.play(note: MIDINoteNumber(pitch.midiNoteNumber))},
+                     noteOff: {(pitch) in synthEngine.stop(note: MIDINoteNumber(pitch.midiNoteNumber))})
+            .frame(height: 150)
+            .padding()
             
-            Button(action: {
-                if isPlaying {
-                    synthEngine.stop(note: MIDI_NOTE_NUMBER_A4)
-                    isPlaying = false
-                } else {
-                    synthEngine.play(note: MIDI_NOTE_NUMBER_A4)
-                    isPlaying = true
-                }
-            }) {
-                Text(isPlaying ? "Stop Tone" : "Play Tone")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 200)
-                    .background(isPlaying ? Color.red : Color.green)
-                    .cornerRadius(10)
-            }
-            
-            Text("Frequency: 440 Hz")
+            Text("Play notes on the keyboard")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }

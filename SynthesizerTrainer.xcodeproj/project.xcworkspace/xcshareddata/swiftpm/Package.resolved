@@ -1,5 +1,5 @@
 {
-  "originHash" : "9ffd3d470c920d0451467e41f7efdfc5e3f1ad3628e9996f32d834585151d071",
+  "originHash" : "d133430d93428a0c649327dad284f3c5b4f7aaf5a6e0060d60df679bb4ff0a56",
   "pins" : [
     {
       "identity" : "audiokit",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "4dd10370125af7f1e26d7a71b2c5929bb3c95087",
         "version" : "1.1.4"
+      }
+    },
+    {
+      "identity" : "keyboard",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/Keyboard.git",
+      "state" : {
+        "revision" : "c0752677c602eec2f97ec50825581608bc56dac6",
+        "version" : "1.4.1"
       }
     },
     {

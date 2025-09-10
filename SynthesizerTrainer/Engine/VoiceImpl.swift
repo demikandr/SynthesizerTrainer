@@ -38,6 +38,7 @@ class VoiceImpl: VoiceProtocol {
 
     // Start playing a note with a specific MIDI note number and velocity
     func start(note: MIDINoteNumber, velocity: MIDIVelocity) {
+        self.note = note
         oscillator.frequency = note.midiNoteToFrequency()
         
         // Use velocity to control the amplitude.
