@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SynethesizerTrainerApp: App {
+struct SynthesizerTrainerApp: App {
     var body: some Scene {
         WindowGroup {
             ExcerciseView()

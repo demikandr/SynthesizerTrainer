@@ -13,7 +13,7 @@ struct ExcerciseView: View {
                 .padding()
             
             SynthParamsView(synthEngine: synthEngine)
-            SynthKeyboardView(synthEngine:synthEngine)
+            SynthKeyboardView(synthEngine: synthEngine)
         }
     }
     

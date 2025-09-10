@@ -1,5 +1,5 @@
 {
-  "originHash" : "99d78d4992b57ea0a93ab3f975ed521e77e490a622ff8ab4d754a8346992f031",
+  "originHash" : "9ffd3d470c920d0451467e41f7efdfc5e3f1ad3628e9996f32d834585151d071",
   "pins" : [
     {
       "identity" : "audiokit",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "efc0d67d3e19578b84d47cac4df72c497fb2173e",
         "version" : "5.7.3"
+      }
+    },
+    {
+      "identity" : "sporthaudiokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/SporthAudioKit.git",
+      "state" : {
+        "revision" : "638c95036430ce23ba2810101de319ed31f481bb",
+        "version" : "5.5.1"
       }
     },
     {

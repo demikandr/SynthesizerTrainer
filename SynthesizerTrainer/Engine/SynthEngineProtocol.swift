@@ -6,8 +6,8 @@ protocol SynthEngineProtocol: ObservableObject {
     var waveform: WaveformType {get set}
     
     // Playing interface
-    func play(pitch: AUValue)
-    func stop(pitch: AUValue)
+    func play(note: MIDINoteNumber)
+    func stop(note: MIDINoteNumber)
     
     // Settings interface
     func updateWaveform(_ newWaveform: WaveformType)

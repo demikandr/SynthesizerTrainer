@@ -6,7 +6,7 @@ import OSLog
 class SynthEngineImpl: SynthEngineProtocol {
     private let engine = AudioEngine()
     private var oscillator: Oscillator?
-    private var currentNote: Float?
+    private var currentNote: MIDINoteNumber?
     private var logger = Logger()
     
     @Published var waveform: WaveformType = .sine {
@@ -46,7 +46,7 @@ class SynthEngineImpl: SynthEngineProtocol {
         createOscillator()
         
         if wasPlaying, let note = playingNote {
-            play(pitch: note)
+            play(note: note)
         }
     }
     
@@ -54,25 +54,20 @@ class SynthEngineImpl: SynthEngineProtocol {
         waveform = newWaveform
     }
     
-    func play(pitch: Float) {
+    func play(note: MIDINoteNumber) {
         guard let oscillator = oscillator else { return }
         
-        oscillator.frequency = pitch
+        oscillator.frequency = note.midiNoteToFrequency()
         oscillator.start()
-        currentNote = pitch
+        currentNote = note
     }
     
-    func stop(pitch: Float) {
+    func stop(note: MIDINoteNumber) {
         guard let oscillator = oscillator else { return }
         
-        if currentNote == pitch {
+        if currentNote == note {
             oscillator.stop()
             currentNote = nil
         }
-    }
-    
-    func stopAll() {
-        oscillator?.stop()
-        currentNote = nil
     }
 }

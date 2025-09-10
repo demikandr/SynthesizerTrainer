@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080DB1C32E6E44A2000ABA45 /* SporthAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 080DB1C22E6E44A2000ABA45 /* SporthAudioKit */; };
+		080DB1C62E6E44CE000ABA45 /* AudioKitEX in Frameworks */ = {isa = PBXBuildFile; productRef = 080DB1C52E6E44CE000ABA45 /* AudioKitEX */; };
 		0823E3C02E56105900E65BE2 /* CLAUDE.md in Resources */ = {isa = PBXBuildFile; fileRef = 0823E3BF2E56105300E65BE2 /* CLAUDE.md */; };
 		0823E3C22E5610C800E65BE2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0823E3C12E5610BE00E65BE2 /* README.md */; };
 		0888F07A2E68399C0098E0ED /* SoundpipeAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0888F0792E68399C0098E0ED /* SoundpipeAudioKit */; };
@@ -38,19 +40,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		0823E38E2E560F9600E65BE2 /* SynethesizerTrainer */ = {
+		0823E38E2E560F9600E65BE2 /* SynthesizerTrainer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SynethesizerTrainer;
-			sourceTree = "<group>";
-		};
-		0823E3A12E560F9800E65BE2 /* SynethesizerTrainerTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SynethesizerTrainerTests;
-			sourceTree = "<group>";
-		};
-		0823E3AB2E560F9800E65BE2 /* SynethesizerTrainerUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SynethesizerTrainerUITests;
+			path = SynthesizerTrainer;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -60,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				080DB1C62E6E44CE000ABA45 /* AudioKitEX in Frameworks */,
+				080DB1C32E6E44A2000ABA45 /* SporthAudioKit in Frameworks */,
 				0888F07A2E68399C0098E0ED /* SoundpipeAudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,9 +80,7 @@
 			children = (
 				0823E3C12E5610BE00E65BE2 /* README.md */,
 				0823E3BF2E56105300E65BE2 /* CLAUDE.md */,
-				0823E38E2E560F9600E65BE2 /* SynethesizerTrainer */,
-				0823E3A12E560F9800E65BE2 /* SynethesizerTrainerTests */,
-				0823E3AB2E560F9800E65BE2 /* SynethesizerTrainerUITests */,
+				0823E38E2E560F9600E65BE2 /* SynthesizerTrainer */,
 				0823E38D2E560F9600E65BE2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,11 +111,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				0823E38E2E560F9600E65BE2 /* SynethesizerTrainer */,
+				0823E38E2E560F9600E65BE2 /* SynthesizerTrainer */,
 			);
 			name = SynethesizerTrainer;
 			packageProductDependencies = (
 				0888F0792E68399C0098E0ED /* SoundpipeAudioKit */,
+				080DB1C22E6E44A2000ABA45 /* SporthAudioKit */,
+				080DB1C52E6E44CE000ABA45 /* AudioKitEX */,
 			);
 			productName = SynethesizerTrainer;
 			productReference = 0823E38C2E560F9600E65BE2 /* SynethesizerTrainer.app */;
@@ -141,9 +135,6 @@
 			);
 			dependencies = (
 				0823E3A02E560F9800E65BE2 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				0823E3A12E560F9800E65BE2 /* SynethesizerTrainerTests */,
 			);
 			name = SynethesizerTrainerTests;
 			packageProductDependencies = (
@@ -164,9 +155,6 @@
 			);
 			dependencies = (
 				0823E3AA2E560F9800E65BE2 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				0823E3AB2E560F9800E65BE2 /* SynethesizerTrainerUITests */,
 			);
 			name = SynethesizerTrainerUITests;
 			packageProductDependencies = (
@@ -198,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0823E3872E560F9600E65BE2 /* Build configuration list for PBXProject "SynethesizerTrainer" */;
+			buildConfigurationList = 0823E3872E560F9600E65BE2 /* Build configuration list for PBXProject "SynthesizerTrainer" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -211,6 +199,8 @@
 				0823E3BB2E56100A00E65BE2 /* XCRemoteSwiftPackageReference "AudioKit" */,
 				0823E3BC2E56101900E65BE2 /* XCRemoteSwiftPackageReference "AudioKitUI" */,
 				0888F0782E6839800098E0ED /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */,
+				080DB1C12E6E44A2000ABA45 /* XCRemoteSwiftPackageReference "SporthAudioKit" */,
+				080DB1C42E6E44CE000ABA45 /* XCRemoteSwiftPackageReference "AudioKitEX" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0823E38D2E560F9600E65BE2 /* Products */;
@@ -538,7 +528,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0823E3872E560F9600E65BE2 /* Build configuration list for PBXProject "SynethesizerTrainer" */ = {
+		0823E3872E560F9600E65BE2 /* Build configuration list for PBXProject "SynthesizerTrainer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0823E3B02E560F9800E65BE2 /* Debug */,
@@ -577,6 +567,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		080DB1C12E6E44A2000ABA45 /* XCRemoteSwiftPackageReference "SporthAudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/SporthAudioKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.5.1;
+			};
+		};
+		080DB1C42E6E44CE000ABA45 /* XCRemoteSwiftPackageReference "AudioKitEX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKitEX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.2;
+			};
+		};
 		0823E3BB2E56100A00E65BE2 /* XCRemoteSwiftPackageReference "AudioKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AudioKit/AudioKit.git";
@@ -604,6 +610,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		080DB1C22E6E44A2000ABA45 /* SporthAudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 080DB1C12E6E44A2000ABA45 /* XCRemoteSwiftPackageReference "SporthAudioKit" */;
+			productName = SporthAudioKit;
+		};
+		080DB1C52E6E44CE000ABA45 /* AudioKitEX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 080DB1C42E6E44CE000ABA45 /* XCRemoteSwiftPackageReference "AudioKitEX" */;
+			productName = AudioKitEX;
+		};
 		0888F0792E68399C0098E0ED /* SoundpipeAudioKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0888F0782E6839800098E0ED /* XCRemoteSwiftPackageReference "SoundpipeAudioKit" */;
