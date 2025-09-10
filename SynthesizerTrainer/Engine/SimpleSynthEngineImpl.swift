@@ -3,7 +3,7 @@ import AudioKit
 import SoundpipeAudioKit
 import OSLog
 
-class SynthEngineImpl: SynthEngineProtocol {
+class SimpleSynthEngineImpl: SynthEngineProtocol {
     private let engine = AudioEngine()
     private var oscillator: Oscillator?
     private var currentNote: MIDINoteNumber?

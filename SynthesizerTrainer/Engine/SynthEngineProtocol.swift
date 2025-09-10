@@ -2,14 +2,15 @@ import SwiftUI
 import AudioKit
 
 protocol SynthEngineProtocol: ObservableObject {
+    
     // Published properties
     var waveform: WaveformType {get set}
     
-    // Playing interface
+    // MARK: Playing interface
     func play(note: MIDINoteNumber)
     func stop(note: MIDINoteNumber)
     
-    // Settings interface
+    // MARK: Settings interface
     func updateWaveform(_ newWaveform: WaveformType)
 }
 

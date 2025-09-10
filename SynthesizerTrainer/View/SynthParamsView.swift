@@ -20,5 +20,5 @@ struct SynthParamsView<T: SynthEngineProtocol>: View {
 }
 
 #Preview {
-    SynthParamsView(synthEngine: SynthEngineImpl())
+    SynthParamsView(synthEngine: SimpleSynthEngineImpl())
 }

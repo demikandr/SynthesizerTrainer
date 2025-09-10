@@ -12,10 +12,10 @@ struct SynthKeyboardView<T: SynthEngineProtocol>: View {
             
             Button(action: {
                 if isPlaying {
-                    synthEngine.stop(note: A4)
+                    synthEngine.stop(note: MIDI_NOTE_NUMBER_A4)
                     isPlaying = false
                 } else {
-                    synthEngine.play(note: A4)
+                    synthEngine.play(note: MIDI_NOTE_NUMBER_A4)
                     isPlaying = true
                 }
             }) {
@@ -33,10 +33,8 @@ struct SynthKeyboardView<T: SynthEngineProtocol>: View {
                 .foregroundColor(.secondary)
         }
     }
-    
-    private let A4: UInt8 = 69
 }
 
 #Preview {
-    SynthKeyboardView(synthEngine: SynthEngineImpl())
+    SynthKeyboardView(synthEngine: SimpleSynthEngineImpl())
 }
